@@ -44,6 +44,7 @@ html,body{margin:0;padding:0;background:var(--paper);}
 body{font-family:'Space Grotesk',system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.5;}
 .wrap{max-width:980px;margin:0 auto;padding:0 clamp(20px,4vw,44px);}
 a{color:inherit;}
+.vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
 .eyebrow{font-family:'JetBrains Mono',ui-monospace,monospace;text-transform:uppercase;letter-spacing:0.14em;font-size:11px;font-weight:500;color:var(--accent);}
 
 /* Masthead — fixed navy band, matches the flyers, same in both themes */
@@ -56,35 +57,34 @@ a{color:inherit;}
 .head-call{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;text-decoration:none;letter-spacing:0.02em;white-space:nowrap;color:var(--on-navy);}
 .head-call span{color:var(--on-navy-dim);}
 
-/* Hero */
+/* Hero (rotating) */
 .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--border);}
-.hero .wrap{padding-top:clamp(52px,8vw,96px);padding-bottom:clamp(52px,8vw,96px);position:relative;z-index:1;}
-.hero .eyebrow{margin-bottom:20px;}
-h1{font-size:clamp(32px,5.6vw,56px);font-weight:700;letter-spacing:-0.02em;line-height:1.05;margin:0;max-width:18ch;text-wrap:balance;}
-.hero-sub{font-size:clamp(15px,1.9vw,18px);color:var(--muted);max-width:54ch;margin:22px 0 34px;line-height:1.55;}
-.cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+.hero .wrap{padding-top:clamp(52px,8vw,92px);padding-bottom:clamp(44px,6vw,72px);position:relative;z-index:1;}
+.hero-rotator{display:grid;}
+.slide{grid-area:1/1;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .6s ease,transform .6s ease;}
+.slide.active{opacity:1;visibility:visible;transform:none;}
+.slide .eyebrow{display:block;margin-bottom:18px;}
+.slide-h{font-size:clamp(32px,5.6vw,56px);font-weight:700;letter-spacing:-0.02em;line-height:1.05;margin:0;max-width:18ch;text-wrap:balance;}
+.slide-sub{font-size:clamp(15px,1.9vw,18px);color:var(--muted);max-width:54ch;margin:22px 0 0;line-height:1.55;}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-top:36px;}
 .btn{display:inline-flex;align-items:center;gap:9px;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;text-decoration:none;padding:13px 20px;border-radius:6px;border:1px solid transparent;cursor:pointer;}
 .btn-primary{background:var(--accent);color:var(--accent-ink);}
 .btn-primary:hover{filter:brightness(1.06);}
 .btn-ghost{background:transparent;color:var(--ink);border-color:var(--border);}
 .btn-ghost:hover{border-color:var(--muted);}
+.hero-dots{display:flex;gap:9px;margin-top:32px;}
+.hero-dot{width:32px;height:4px;border-radius:2px;border:0;padding:0;background:var(--border);cursor:pointer;transition:background .2s;}
+.hero-dot.on{background:var(--accent);}
+.hero-dot:hover{background:var(--muted);}
 .hero-reticle{position:absolute;color:var(--accent);opacity:0.07;width:min(560px,66vw);height:auto;right:-8%;top:50%;transform:translateY(-50%);z-index:0;pointer-events:none;}
 @media(prefers-color-scheme:dark){.hero-reticle{opacity:0.11;}}
 
 /* Generic section */
 .section{padding:clamp(48px,7vw,86px) 0;}
 .section-head{max-width:60ch;margin-bottom:38px;}
-.section-head .eyebrow{margin-bottom:12px;}
+.section-head .eyebrow{display:block;margin-bottom:12px;}
 .section-head h2{font-size:clamp(24px,3.6vw,34px);font-weight:700;letter-spacing:-0.015em;margin:0;line-height:1.12;text-wrap:balance;}
 .section-head p{color:var(--muted);font-size:clamp(14px,1.7vw,16px);margin:14px 0 0;max-width:52ch;line-height:1.6;}
-
-/* Benefits — three flyer messages */
-.benefit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
-@media(max-width:780px){.benefit-grid{grid-template-columns:1fr;}}
-.benefit{border:1px solid var(--border);border-radius:6px;background:var(--surface);padding:26px 24px;display:flex;flex-direction:column;gap:11px;}
-.benefit .eyebrow{margin:0;}
-.benefit h3{font-size:20px;font-weight:700;margin:0;letter-spacing:-0.01em;line-height:1.15;text-wrap:balance;}
-.benefit p{margin:0;font-size:14px;color:var(--muted);line-height:1.6;}
 
 /* Services */
 .svc-section{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
@@ -100,6 +100,7 @@ h1{font-size:clamp(32px,5.6vw,56px);font-weight:700;letter-spacing:-0.02em;line-
 @media(max-width:780px){.login .wrap{grid-template-columns:1fr;gap:26px;}}
 .login h2{font-size:clamp(22px,3vw,28px);font-weight:700;margin:12px 0 10px;letter-spacing:-0.01em;}
 .login p{margin:0;color:var(--muted);font-size:14.5px;max-width:44ch;line-height:1.6;}
+.login .eyebrow{display:block;}
 .login-form{display:flex;flex-direction:column;gap:10px;}
 .login-form label{font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:0.1em;font-size:10.5px;font-weight:500;color:var(--muted);}
 .field{display:flex;gap:10px;flex-wrap:wrap;}
@@ -124,7 +125,7 @@ h1{font-size:clamp(32px,5.6vw,56px);font-weight:700;letter-spacing:-0.02em;line-
 
 :where(a,button,input):focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
 .cta-band :where(a,button):focus-visible,.masthead :where(a,button):focus-visible{outline-color:var(--on-navy);}
-@media(prefers-reduced-motion:reduce){*{transition:none!important;}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;}.slide{transform:none;}}
 </style>
 </head>
 <body>
@@ -143,7 +144,7 @@ h1{font-size:clamp(32px,5.6vw,56px);font-weight:700;letter-spacing:-0.02em;line-
   </div>
 </header>
 
-<section class="hero">
+<section class="hero" id="hero">
   <svg class="hero-reticle" viewBox="0 0 200 200" aria-hidden="true">
   <circle cx="100" cy="100" r="78" fill="none" stroke="currentColor" stroke-width="2"/>
   <circle cx="100" cy="100" r="52" fill="none" stroke="currentColor" stroke-width="2"/>
@@ -154,39 +155,34 @@ h1{font-size:clamp(32px,5.6vw,56px);font-weight:700;letter-spacing:-0.02em;line-
   <line x1="166" y1="100" x2="196" y2="100" stroke="currentColor" stroke-width="2"/>
 </svg>
   <div class="wrap">
-    <div class="eyebrow">Sound familiar?</div>
-    <h1>Spending on PPC and SEO but not seeing results?</h1>
-    <p class="hero-sub">Tired of being drowned out by your competitors? There’s a better way to reach the clients you actually want — and keep showing up until they’re ready to buy.</p>
+    <h1 class="vh">Targeted Marketing — IP-targeted digital advertising for local businesses</h1>
+    <div class="hero-rotator" aria-live="off">
+<div class="slide active" aria-hidden="false">
+  <div class="eyebrow">Sound familiar?</div>
+  <p class="slide-h">Spending on PPC and SEO but not seeing results?</p>
+  <p class="slide-sub">Tired of being drowned out by your competitors? There’s a better way to reach the audience you want.</p>
+</div>
+<div class="slide" aria-hidden="true">
+  <div class="eyebrow">Warm the lead first</div>
+  <p class="slide-h">Turn your cold calls warm.</p>
+  <p class="slide-sub">Your prospects see your ads before you ever pick up the phone.</p>
+</div>
+<div class="slide" aria-hidden="true">
+  <div class="eyebrow">Always top of mind</div>
+  <p class="slide-h">Stay in front of your targeted audience.</p>
+  <p class="slide-sub">Your audience keeps seeing you — right up until they’re ready to buy.</p>
+</div>
+<div class="slide" aria-hidden="true">
+  <div class="eyebrow">Don’t let the handshake fade</div>
+  <p class="slide-h">Build on the momentum of networking events.</p>
+  <p class="slide-sub">Keep showing up for the people you just met — long after the event ends.</p>
+</div>
+    </div>
     <div class="cta-row">
       <a class="btn btn-primary" href="tel:+17329557517">Start a campaign</a>
       <a class="btn btn-ghost" href="#login">Client login</a>
     </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">Why it works</div>
-      <h2>Get in front of the right people — and stay there.</h2>
-    </div>
-    <div class="benefit-grid">
-<article class="benefit">
-  <div class="eyebrow">Warm the lead first</div>
-  <h3>Turn your cold calls warm.</h3>
-  <p>Your prospects see your ads before you ever pick up the phone.</p>
-</article>
-<article class="benefit">
-  <div class="eyebrow">Always top of mind</div>
-  <h3>Stay in front of your targeted clients.</h3>
-  <p>The right people keep seeing you — right up until they’re ready to buy.</p>
-</article>
-<article class="benefit">
-  <div class="eyebrow">Don’t let the handshake fade</div>
-  <h3>Build on the momentum of networking events.</h3>
-  <p>Keep showing up for the people you just met — long after the event ends.</p>
-</article>
-    </div>
+    <div class="hero-dots" aria-label="Rotating messages"><button class="hero-dot on" type="button" data-i="0" aria-label="Show message 1: Sound familiar?"></button><button class="hero-dot" type="button" data-i="1" aria-label="Show message 2: Warm the lead first"></button><button class="hero-dot" type="button" data-i="2" aria-label="Show message 3: Always top of mind"></button><button class="hero-dot" type="button" data-i="3" aria-label="Show message 4: Don’t let the handshake fade"></button></div>
   </div>
 </section>
 
@@ -261,14 +257,48 @@ h1{font-size:clamp(32px,5.6vw,56px);font-weight:700;letter-spacing:-0.02em;line-
 
 <script>
 (function(){
+  // ── Rotating hero ──────────────────────────────────────────────────────────
+  var hero = document.getElementById('hero');
+  var slides = Array.prototype.slice.call(hero.querySelectorAll('.slide'));
+  var dots = Array.prototype.slice.call(hero.querySelectorAll('.hero-dot'));
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var DELAY = 6600, i = 0, timer = null;
+
+  function show(n){
+    i = (n + slides.length) % slides.length;
+    slides.forEach(function(s, k){
+      var on = k === i;
+      s.classList.toggle('active', on);
+      s.setAttribute('aria-hidden', on ? 'false' : 'true');
+    });
+    dots.forEach(function(d, k){
+      var on = k === i;
+      d.classList.toggle('on', on);
+      if (on) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current');
+    });
+  }
+  function start(){ if (reduce || slides.length < 2) return; stop(); timer = setInterval(function(){ show(i + 1); }, DELAY); }
+  function stop(){ if (timer){ clearInterval(timer); timer = null; } }
+
+  dots.forEach(function(d){
+    d.addEventListener('click', function(){ show(parseInt(d.getAttribute('data-i'), 10) || 0); start(); });
+  });
+  hero.addEventListener('mouseenter', stop);
+  hero.addEventListener('mouseleave', start);
+  hero.addEventListener('focusin', stop);
+  hero.addEventListener('focusout', start);
+  document.addEventListener('visibilitychange', function(){ document.hidden ? stop() : start(); });
+
+  show(0); start();
+
+  // ── Client login → report ──────────────────────────────────────────────────
   var form = document.getElementById('loginForm');
   var input = document.getElementById('code');
   var err = document.getElementById('codeErr');
   form.addEventListener('submit', function(e){
     e.preventDefault();
-    // Access code maps to a report filename; allow only safe characters.
     var raw = (input.value || '').trim().toLowerCase().replace(/[^a-z0-9-]/g, '');
-    if (!raw) { err.textContent = 'Please enter your access code.'; input.focus(); return; }
+    if (!raw){ err.textContent = 'Please enter your access code.'; input.focus(); return; }
     err.textContent = '';
     window.location.href = "https://reports.targetedmarketingllc.com" + '/' + raw + '.html';
   });
