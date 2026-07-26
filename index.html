@@ -114,6 +114,10 @@ a{color:inherit;}
 .cta-band h2{font-size:clamp(24px,3.6vw,36px);font-weight:700;letter-spacing:-0.015em;margin:0;line-height:1.05;}
 .cta-band .btn-call{background:var(--on-red);color:var(--band-red);border:0;font-size:14px;padding:14px 22px;}
 .cta-band .btn-call:hover{filter:brightness(0.96);}
+.cta-contact{display:flex;flex-direction:column;align-items:flex-end;gap:12px;}
+@media(max-width:560px){.cta-contact{align-items:flex-start;}}
+.cta-email{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;letter-spacing:0.02em;text-decoration:none;color:var(--on-red);border-bottom:1px solid color-mix(in oklab,var(--on-red) 55%,transparent);}
+.cta-email:hover{border-bottom-color:var(--on-red);}
 
 /* Footer */
 .site-foot{background:var(--band-navy);}
@@ -234,7 +238,10 @@ a{color:inherit;}
 <section class="cta-band">
   <div class="wrap">
     <h2>Let’s target your market.</h2>
-    <a class="btn btn-call" href="tel:+17329557517">Call (732) 955-7517</a>
+    <div class="cta-contact">
+      <a class="btn btn-call" href="tel:+17329557517">Call (732) 955-7517</a>
+      <a class="cta-email" href="mailto:info@targetedmarketingllc.com">info@targetedmarketingllc.com</a>
+    </div>
   </div>
 </section>
 
@@ -250,6 +257,7 @@ a{color:inherit;}
 </svg><span class="wordmark"><span class="t">Targeted</span> Marketing</span></div>
     <div class="foot-meta">
       <a href="tel:+17329557517">(732) 955-7517</a>
+      <a href="mailto:info@targetedmarketingllc.com">info@targetedmarketingllc.com</a>
       <span>&copy; 2026 Targeted Marketing LLC · targetedmarketingllc.com</span>
     </div>
   </div>
