@@ -112,12 +112,11 @@ a{color:inherit;}
 .cta-band{background:var(--band-red);color:var(--on-red);}
 .cta-band .wrap{display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap;padding:clamp(34px,5vw,54px) clamp(20px,4vw,44px);}
 .cta-band h2{font-size:clamp(24px,3.6vw,36px);font-weight:700;letter-spacing:-0.015em;margin:0;line-height:1.05;}
-.cta-band .btn-call{background:var(--on-red);color:var(--band-red);border:0;font-size:14px;padding:14px 22px;}
+.cta-band .btn-call{background:var(--on-red);color:var(--band-red);border:0;font-size:14px;padding:14px 22px;text-transform:none;letter-spacing:0.02em;justify-content:center;}
 .cta-band .btn-call:hover{filter:brightness(0.96);}
-.cta-contact{display:flex;flex-direction:column;align-items:flex-end;gap:12px;}
-@media(max-width:560px){.cta-contact{align-items:flex-start;}}
-.cta-email{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;letter-spacing:0.02em;text-decoration:none;color:var(--on-red);border-bottom:1px solid color-mix(in oklab,var(--on-red) 55%,transparent);}
-.cta-email:hover{border-bottom-color:var(--on-red);}
+.cta-band .btn-call .lbl{text-transform:uppercase;letter-spacing:0.06em;}
+.cta-band .btn-email .val{word-break:break-word;}
+.cta-contact{display:flex;flex-direction:column;align-items:stretch;gap:12px;min-width:min(360px,100%);}
 
 /* Footer */
 .site-foot{background:var(--band-navy);}
@@ -239,8 +238,8 @@ a{color:inherit;}
   <div class="wrap">
     <h2>Let’s target your market.</h2>
     <div class="cta-contact">
-      <a class="btn btn-call" href="tel:+17329557517">Call (732) 955-7517</a>
-      <a class="cta-email" href="mailto:info@targetedmarketingllc.com">info@targetedmarketingllc.com</a>
+      <a class="btn btn-call" href="tel:+17329557517"><span class="lbl">Call:</span><span class="val">(732) 955-7517</span></a>
+      <a class="btn btn-call btn-email" href="mailto:info@targetedmarketingllc.com"><span class="lbl">Email:</span><span class="val">info@targetedmarketingllc.com</span></a>
     </div>
   </div>
 </section>
