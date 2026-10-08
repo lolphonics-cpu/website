@@ -137,6 +137,9 @@ a{color:inherit;}
 .site-foot .wordmark{font-size:15px;color:var(--on-navy);}
 .foot-meta{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--on-navy-dim);letter-spacing:0.03em;text-align:right;display:flex;flex-direction:column;gap:3px;}
 .foot-meta a{text-decoration:none;color:var(--on-navy);}
+.foot-legal{display:flex;gap:14px;}
+.foot-legal a{text-decoration:none;color:var(--on-navy-dim);}
+.foot-legal a:hover{color:var(--on-navy);text-decoration:underline;}
 
 :where(a,button,input):focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
 .cta-band :where(a,button):focus-visible,.masthead :where(a,button):focus-visible,.hero.on-welcome :where(a,button):focus-visible{outline-color:var(--on-navy);}
@@ -338,6 +341,10 @@ a{color:inherit;}
     <div class="foot-meta">
       <a href="tel:+17329557517">(732) 955-7517</a>
       <a href="mailto:info@targetedmarketingllc.com">info@targetedmarketingllc.com</a>
+      <nav class="foot-legal" aria-label="Legal">
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/terms-of-service/">Terms of Service</a>
+      </nav>
       <span>&copy; 2026 Targeted Marketing LLC · targetedmarketingllc.com</span>
     </div>
   </div>
